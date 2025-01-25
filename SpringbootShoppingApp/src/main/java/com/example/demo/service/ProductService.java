@@ -19,5 +19,5 @@ public interface ProductService {
 
 	public abstract List<Product> getAllProductBetween(int initialPrice, int finalPrice);
 
-	public abstract List<Product> getProductByCategory(String category);
+	public abstract List<Product> getProductByCategory(String category) throws ProductNotFound;
 }

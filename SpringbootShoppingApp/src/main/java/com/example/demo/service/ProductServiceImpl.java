@@ -59,10 +59,13 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 	
-	@Override
-	public List<Product> getProductByCategory(String productCategory) {
-		return repository.findByProductCategory(productCategory);
-
-	}
+	  @Override
+	    public List<Product> getProductByCategory(String productCategory) throws ProductNotFound {
+	        List<Product> products = repository.findByProductCategory(productCategory);
+	        if (products.isEmpty()) {
+	            throw new ProductNotFound("No Products Found in the given category!!");
+	        }
+	        return products;
+	    }
 
 }

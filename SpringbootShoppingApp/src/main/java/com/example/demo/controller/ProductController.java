@@ -6,7 +6,7 @@ import jakarta.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.validation.BindingResult;
+//import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,70 +33,52 @@ public class ProductController {
 	ProductService service;
 
 	@PostMapping("/save") // http://localhost:2001/products/save
-	public String saveProduct(@Valid @RequestBody Product product, BindingResult result) {
-		if (result.hasErrors()) {
-			return result.getAllErrors().toString();
-		}
-		logger.info("Received request to save product: {}", product);
-		String response = service.addProduct(product);
+	public String saveProduct(@Valid @RequestBody Product product) {
 		logger.info("Product saved successfully: {}", product);
-		return response;
+		return service.addProduct(product);
+
 	}
 
 	@PutMapping("/update") // http://localhost:2001/products/update
-	public Product updateProduct(@Valid @RequestBody Product product, BindingResult result) throws ProductNotFound {
-		if (result.hasErrors()) {
-			return null;
-		}
-		logger.info("Received request to update product: {}", product);
-		Product response = service.updateProduct(product);
+	public Product updateProduct(@Valid @RequestBody Product product) {
 		logger.info("Product updated successfully: {}", product);
-		return response;
+		return service.updateProduct(product);
+
 	}
 
 	@DeleteMapping("/delete/{id}") // http://localhost:2001/products/delete
-	public String deleteProduct(@PathVariable("id") int productId) throws ProductNotFound {
-		logger.info("Received request to delete product with ID: {}", productId);
-		String response = service.deleteProduct(productId);
+	public String deleteProduct(@PathVariable("id") int productId) {
 		logger.info("Product deleted successfully with ID: {}", productId);
-		return response;
+		return service.deleteProduct(productId);
+
 	}
 
 	@GetMapping("/getById/{id}") // http://localhost:2001/products/getById
 	public Product getProduct(@PathVariable("id") int productId) throws ProductNotFound {
-		logger.info("Received request to find product with ID: {}", productId);
-		Product response = service.getProductById(productId);
 		logger.info("Product found successfully with ID: {}", productId);
-		return response;
+		return service.getProductById(productId);
+
 	}
 
 	@GetMapping("/getAll") // http://localhost:2001/products/getAll
 	public List<Product> getAllProducts() {
-		logger.info("Received request to find all products");
-		List<Product> response = service.getAllProducts();
 		logger.info("All products found successfully");
-		return response;
+		return service.getAllProducts();
+
 	}
 
 	@GetMapping("/getBetween/{price1}/{price2}") // http://localhost:2001/products/getBetween
 	public List<Product> getAllProductBetween(@PathVariable("price1") int initialPrice,
 			@PathVariable("price2") int finalPrice) {
-		logger.info("Received request to get products between: {} and {}", initialPrice, finalPrice);
-		List<Product> response = service.getAllProductBetween(initialPrice, finalPrice);
 		logger.info("Products found successfully between: {} and {}", initialPrice, finalPrice);
-		return response;
+		return service.getAllProductBetween(initialPrice, finalPrice);
+
 	}
 
 	@GetMapping("/byCategory/{category}") // http://localhost:2001/products/byCategory
 	public List<Product> getProductByCategory(@PathVariable String category) throws ProductNotFound {
-		logger.info("Received request to get products of category: {}", category);
-		List<Product> response = service.getProductByCategory(category);
-		if (response.isEmpty()) {
-			throw new ProductNotFound("Product is not found with this category");
-		}
+		logger.info("Products found successfully of category: {}", category);
+		return service.getProductByCategory(category);
 
-		else
-			logger.info("Products found successfully of category: {}", category);
-		return response;
 	}
 }

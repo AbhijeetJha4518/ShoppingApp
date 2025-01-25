@@ -19,7 +19,7 @@ public class Product {
     private String productName;
 
     @NotNull(message = "Product price is mandatory")
-    @Min(value = 0, message = "Product price should be greater than or equal to 0")
+    @Min(value = 100, message = "Product price should be greater than or equal to 0")
     private int productPrice;
 
     @NotBlank(message = "Product category is mandatory")
