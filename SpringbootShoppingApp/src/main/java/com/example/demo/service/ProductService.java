@@ -9,7 +9,7 @@ public interface ProductService {
 
 	public abstract String addProduct(Product product);
 
-	public abstract Product upadateProduct(Product product);
+	public abstract Product updateProduct(Product product);
 
 	public abstract String deleteProduct(int productId);
 
@@ -19,5 +19,5 @@ public interface ProductService {
 
 	public abstract List<Product> getAllProductBetween(int initialPrice, int finalPrice);
 
-	public abstract List<Product> getProductByCategory(String product);
+	public abstract List<Product> getProductByCategory(String category);
 }

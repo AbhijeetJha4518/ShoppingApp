@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product upadateProduct(Product product) {
+	public Product updateProduct(Product product) {
 		return repository.save(product);
 
 	}
@@ -64,4 +64,5 @@ public class ProductServiceImpl implements ProductService {
 		return repository.findByProductCategory(productCategory);
 
 	}
+
 }

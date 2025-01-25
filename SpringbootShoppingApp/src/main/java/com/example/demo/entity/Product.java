@@ -15,7 +15,7 @@ public class Product {
     private int productId;
 
     @NotBlank(message = "Product name is mandatory")
-    @Size(max = 100, message = "Product name should not exceed 100 characters")
+    @Size(max = 25, message = "Product name should not exceed 100 characters")
     private String productName;
 
     @NotNull(message = "Product price is mandatory")
